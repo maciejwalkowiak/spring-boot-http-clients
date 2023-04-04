@@ -16,8 +16,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<name>Spring Auto Http Clients Parent</name>
-	<description>Spring Auto Http Clients</description>
+	<name>Spring Boot Http Clients Parent</name>
+	<description>Spring Boot Http Clients</description>
 	<url>https://github.com/maciejwalkowiak/spring-boot-http-clients/</url>
 	<inceptionYear>2023</inceptionYear>
 
