@@ -1,0 +1,5 @@
+http.clients:
+  todo-client:
+    url: https://todo-service.com/
+  user-client:
+    url: https://user-service.com/

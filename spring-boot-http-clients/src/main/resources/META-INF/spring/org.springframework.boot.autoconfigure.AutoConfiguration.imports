@@ -1,0 +1,2 @@
+com.maciejwalkowiak.spring.http.autoconfigure.WebClientsAutoConfiguration
+com.maciejwalkowiak.spring.http.autoconfigure.HttpClientsAutoConfiguration
