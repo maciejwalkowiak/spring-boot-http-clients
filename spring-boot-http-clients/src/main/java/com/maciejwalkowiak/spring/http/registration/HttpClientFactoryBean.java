@@ -2,8 +2,6 @@ package com.maciejwalkowiak.spring.http.registration;
 
 import java.util.Map;
 
-import com.maciejwalkowiak.spring.http.WebClientsProperties;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +10,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
-import org.springframework.web.service.invoker.HttpClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 /**

@@ -6,8 +6,8 @@ import com.maciejwalkowiak.spring.http.annotation.HttpClient;
 
 import org.springframework.web.service.annotation.GetExchange;
 
-@HttpClient("todo-client")
-public interface TodoClient {
+@HttpClient("user-client")
+public interface UserClient {
     @GetExchange
-    List<Todo> get();
+    List<User> get();
 }

@@ -1,5 +1,5 @@
 http.clients:
   todo-client:
-    url: https://todo-service.com/
+    url: https://jsonplaceholder.typicode.com/todos
   user-client:
-    url: https://user-service.com/
+    url: https://jsonplaceholder.typicode.com/users

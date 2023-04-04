@@ -3,7 +3,6 @@ package com.maciejwalkowiak.spring.http.autoconfigure;
 import java.util.Map;
 
 import com.maciejwalkowiak.spring.http.WebClientsProperties;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.boot.autoconfigure.AutoConfigurations;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WebClientsAutoConfigurationTests {
     private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
