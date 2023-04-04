@@ -31,7 +31,8 @@ public class HttpClientFactoryBean implements FactoryBean<Object>, ApplicationCo
     @Nullable
     private ApplicationContext applicationContext;
 
-    @Override public Object getObject() throws Exception {
+    @Override
+    public Object getObject() throws Exception {
         Assert.state(applicationContext != null, "applicationContext cannot be null");
         Assert.state(clazz != null, "clazz cannot be null");
         Assert.state(clientName != null, "clientName cannot be null");

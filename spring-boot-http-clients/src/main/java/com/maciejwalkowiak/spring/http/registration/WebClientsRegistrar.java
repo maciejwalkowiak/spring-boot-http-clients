@@ -28,7 +28,8 @@ public class WebClientsRegistrar implements ImportBeanDefinitionRegistrar, Envir
 
     private Environment environment;
 
-    @Override public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry,
+    @Override
+    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry,
             BeanNameGenerator importBeanNameGenerator) {
         if (!(environment instanceof ConfigurableEnvironment)) {
             return;

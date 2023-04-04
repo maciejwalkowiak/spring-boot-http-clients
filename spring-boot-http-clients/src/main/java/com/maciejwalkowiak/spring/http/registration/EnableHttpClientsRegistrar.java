@@ -22,7 +22,8 @@ import org.springframework.util.Assert;
 public class EnableHttpClientsRegistrar extends AbstractHttpClientsRegistrar {
 
 
-    @Override public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry,
+    @Override
+    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry,
             BeanNameGenerator importBeanNameGenerator) {
 
         registerClients(resolveClientsSetAsAttribute(importingClassMetadata), registry);
