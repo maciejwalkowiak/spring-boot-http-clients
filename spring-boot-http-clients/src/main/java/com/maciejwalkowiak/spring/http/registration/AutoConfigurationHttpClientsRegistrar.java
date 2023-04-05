@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.maciejwalkowiak.spring.http.annotation.HttpClient;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -26,9 +28,12 @@ import org.springframework.util.ClassUtils;
  * @author Maciej Walkowiak
  */
 public class AutoConfigurationHttpClientsRegistrar extends AbstractHttpClientsRegistrar {
+    private static final Log LOGGER = LogFactory.getLog(AutoConfigurationHttpClientsRegistrar.class);
 
     @Override public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry,
             BeanNameGenerator importBeanNameGenerator) {
+        LOGGER.info("Registering clients discovered in the main package");
+
         registerClients(resolveClientsInMainPackages(), registry);
     }
 
@@ -37,11 +42,16 @@ public class AutoConfigurationHttpClientsRegistrar extends AbstractHttpClientsRe
 
         List<String> mainPackages = resolveMainPackages();
 
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Resolved main packages: " + mainPackages);
+        }
+
         if (!mainPackages.isEmpty()) {
             ClassPathScanningCandidateComponentProvider scanner = getScanner();
             scanner.addIncludeFilter(new AnnotationTypeFilter(HttpClient.class));
 
-            return mainPackages.stream().flatMap(it -> scanner.findCandidateComponents(it).stream())
+            List<HttpClientCandidate> candidates = mainPackages.stream()
+                    .flatMap(it -> scanner.findCandidateComponents(it).stream())
                     .filter(it -> it.getBeanClassName() != null)
                     .map(it -> {
                         try {
@@ -54,6 +64,12 @@ public class AutoConfigurationHttpClientsRegistrar extends AbstractHttpClientsRe
                             throw new RuntimeException(e);
                         }
                     }).toList();
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Found " + candidates.size() + " candidates: " + candidates);
+            }
+
+            return candidates;
         }
         return Collections.emptyList();
     }
@@ -62,6 +78,7 @@ public class AutoConfigurationHttpClientsRegistrar extends AbstractHttpClientsRe
         try {
             return AutoConfigurationPackages.get(beanFactory);
         } catch (IllegalStateException e) {
+            LOGGER.debug("Main package not found");
             return Collections.emptyList();
         }
     }
