@@ -25,14 +25,14 @@ class HttpClientsAutoConfigurationTests {
 
 
     @Test
-    void foo() {
+    void createsHttpClient() {
         this.contextRunner
                 .withConfiguration(UserConfigurations.of(AppConfigWithWebClientBean.class))
                 .run(ctx -> assertThat(ctx.getBean(TodoClient.class)).isNotNull());
     }
 
     @Test
-    void foo2() {
+    void doesNotCreateHttpClientWhenWebClientNotConfigured() {
         this.contextRunner
                 .withConfiguration(UserConfigurations.of(AppConfigWithoutWebClientBean.class))
                 .run(ctx -> assertThatThrownBy(() -> ctx.getBean(TodoClient.class))
@@ -40,7 +40,7 @@ class HttpClientsAutoConfigurationTests {
     }
 
     @Test
-    void foo3() {
+    void createsHttpClientWhenDefinedOutsideOfMainPackage() {
         this.contextRunner
                 .withConfiguration(UserConfigurations.of(AppConfigWithBeanOutsideOfMainPackage.class))
                 .run(ctx -> assertThat(ctx.getBean(UserClient.class)).isNotNull());
