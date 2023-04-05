@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.type.AnnotationMetadata;
@@ -17,7 +19,9 @@ import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
 /**
- * Registers bean definition for HTTP clients annotated with {@link HttpClient}.
+ * Registers bean definition for HTTP clients annotated with {@link HttpClient} by looking into the packages of classes
+ * annotated with {@link EnableAutoConfiguration} or {@link SpringBootApplication}.
+ * If such class is not found, does not register anything.
  *
  * @author Maciej Walkowiak
  */

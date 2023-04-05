@@ -1,10 +1,22 @@
 # Spring Boot HTTP Clients
 
-**Spring Boot HTTP Clients** provides zero-config auto-configuration for `WebClient` and Spring 6 HTTP Interface based HTTP clients in a **Spring Boot** application.
+**Spring Boot HTTP Clients** provides zero-boilerplate auto-configuration for `WebClient` and Spring 6 HTTP Interface based HTTP clients in a **Spring Boot** application.
 
 > **Note**
 > Project is in early stage, expect breaking changes.
 
+Spring 6 introduced a new way to define HTTP clients using interfaces - [HTTP Interfaces](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#rest-http-interface) (introduction video: [🚀 New in Spring Framework 6: HTTP Interfaces](https://www.youtube.com/watch?v=A1V71peRNn0).
+
+Right now, setting up an HTTP client requires a bit of boilerplate code:
+
+1. Create a property for the base url. 
+2. Create a `WebClient` bean which uses this property
+3. Create a `HttpServiceProxyFactory`.
+
+This project is meant to simplify this process and provide ease of creating HTTP clients similar to [Spring Cloud OpenFeign](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/).
+
+> **Note**
+> Very likely, Spring Boot will eventually implement its own way to autoconfigure HTTP clients and this project will become deprecated. Look for updates on this topic here: [#31337](https://github.com/spring-projects/spring-boot/issues/31337)
 
 ## 🤔 How to install
 
@@ -48,5 +60,18 @@ public interface TodoClient {
 ```
 
 3. That's it! Now you can inject `TodoClient` anywhere in your code 🙃
+
+## Advanced usage
+
+Autoconfigured `WebClient` instances are the result of calling Spring Boot autoconfigured `WebClient.Builder#build` 
+which allow to define custom `WebClientCustomizer` that get applied on the `WebClient` beans.
+
+If for any reason you cannot rely on the autoconfigured `WebClient`, but you still want to use autoconfigured HTTP Interface 
+based HTTP client, make sure to create a bean with name `<client-name>.WebClient` which will be picked up to create an HTTP client. 
+
+## Contributing
+
+If you found a bug or a missing feature - you're very welcome to submit an issue and a pull request with a fix.
+Note, that this library is intended only to glue things together and not to compensate on the missing features in Spring's support for HTTP interfaces.
 
 Sounds good? Consider [❤️ Sponsoring](https://github.com/sponsors/maciejwalkowiak) the project! Thank you!

@@ -17,6 +17,8 @@ import org.springframework.util.Assert;
 /**
  * Registers bean definition for HTTP clients annotated with {@link HttpClient}.
  *
+ * Meant to be used only with {@link EnableHttpClients}.
+ *
  * @author Maciej Walkowiak
  */
 public class EnableHttpClientsRegistrar extends AbstractHttpClientsRegistrar {

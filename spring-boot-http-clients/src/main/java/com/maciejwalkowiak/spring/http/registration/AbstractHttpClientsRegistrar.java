@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.lang.Nullable;
 
 /**
- * Registers bean definition for HTTP clients annotated with {@link HttpClient}.
+ * Base class for registrars that register bean definition for HTTP clients annotated with {@link HttpClient}.
  *
  * @author Maciej Walkowiak
  */
