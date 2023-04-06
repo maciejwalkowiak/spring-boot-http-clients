@@ -41,8 +41,13 @@ Then, add the dependency to `spring-boot-http-clients`:
 http.clients:
   todo-client:
     url: https://jsonplaceholder.typicode.com/todos
+    default-header:
+      X-My-Header: my-value-x
+      Y-My-Header: my-value-y
   user-client:
     url: https://jsonplaceholder.typicode.com/users
+    default-header:
+      X-My-Header: ${DYNAMIC_VALUE:default-value}
 ```
 
 The client names (in the above example, `todo-client` and `user-client`) are just strings - use anything that makes sense - they are going to be used to construct the `WebClient` bean name.
@@ -66,6 +71,42 @@ public interface TodoClient {
 Autoconfigured `WebClient` instances are the result of calling Spring Boot autoconfigured `WebClient.Builder#build`, which allows defining custom `WebClientCustomizer` that get applied on the `WebClient` beans.
 
 If for any reason you cannot rely on the autoconfigured `WebClient`, but you still want to use autoconfigured HTTP Interface based HTTP client, make sure to create a bean with name `<client-name>.WebClient`, which will be picked up to create an HTTP client.
+
+### Customizing Headers
+Default headers can be set in `application.yml` or `application.properties` under the prefix `http.clients.<client-name>.headers` key. 
+
+```yaml
+http.clients:
+  todo-client:
+    url: https://jsonplaceholder.typicode.com/todos
+    headers:
+      X-My-Header: my-value-x
+      Y-My-Header: ${DYNAMIC_VALUE:default-value}
+```
+
+### Customizing Cookies
+Default cookies can be set in `application.yml` or `application.properties` under the prefix `http.clients.<client-name>.cookies` key.
+
+```yaml
+http.clients:
+  todo-client:
+    url: https://jsonplaceholder.typicode.com/todos
+    cookies:
+      someCookie: cookie-value
+      someDynamicCookie: ${DYNAMIC_VALUE:default-value}
+```
+
+### Adding Filters
+[Filter functions](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/ExchangeFilterFunction.html) can be defined in `application.yml` or `application.properties` under the prefix `http.clients.<client-name>.filters` key.
+
+```yaml
+http.clients:
+  todo-client:
+    url: https://jsonplaceholder.typicode.com/todos
+    filters:
+      - filterFunction
+      - filterFunction2
+```
 
 ## 👥 Contributing
 
