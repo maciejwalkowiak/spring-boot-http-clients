@@ -1,9 +1,5 @@
 package com.maciejwalkowiak.spring.http.registration;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -16,10 +12,16 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * Registers bean definitions for {@link WebClient}s defined in Spring {@link Environment} under prefix {@code "http.clients}.
  *
  * @author Maciej Walkowiak
+ * @author Tigran Babloyan
  */
 public class WebClientsRegistrar implements ImportBeanDefinitionRegistrar, EnvironmentAware {
     private static final String PREFIX = "http.clients";
@@ -39,14 +41,14 @@ public class WebClientsRegistrar implements ImportBeanDefinitionRegistrar, Envir
         }
     }
 
-    private List<String> resolveClientNames() {
+    private Set<String> resolveClientNames() {
         ConfigurableEnvironment env = (ConfigurableEnvironment) environment;
         return env.getPropertySources().stream()
                 .flatMap(WebClientsRegistrar::resolvePropertyNames)
                 .filter(it -> it.startsWith(PREFIX))
                 .map(it -> it.substring((PREFIX + ".").length()))
                 .map(it -> it.substring(0, it.indexOf(".")))
-                .toList();
+                .collect(Collectors.toSet());
     }
 
     private static Stream<String> resolvePropertyNames(PropertySource<?> it) {

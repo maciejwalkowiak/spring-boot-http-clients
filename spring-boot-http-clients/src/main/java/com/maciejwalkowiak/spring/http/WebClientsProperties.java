@@ -1,5 +1,6 @@
 package com.maciejwalkowiak.spring.http;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -19,6 +20,12 @@ public class WebClientsProperties {
 
     public static class WebClientConfig {
         private String url;
+        
+        private List<String> filters;
+        
+        private Map<String, String> headers;
+
+        private Map<String, String> cookies;
 
         public String getUrl() {
             return url;
@@ -26,6 +33,30 @@ public class WebClientsProperties {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+
+        public Map<String, String> getHeaders() {
+            return headers;
+        }
+
+        public void setHeaders(Map<String, String> headers) {
+            this.headers = headers;
+        }
+
+        public List<String> getFilters() {
+            return filters;
+        }
+
+        public void setFilters(List<String> filters) {
+            this.filters = filters;
+        }
+
+        public Map<String, String> getCookies() {
+            return cookies;
+        }
+
+        public void setCookies(Map<String, String> cookies) {
+            this.cookies = cookies;
         }
     }
 }
