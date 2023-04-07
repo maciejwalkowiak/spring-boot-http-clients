@@ -20,10 +20,7 @@ This project aims to simplify this process and provide ease of creating HTTP cli
 
 ## 🤔 How to install
 
-The project is not yet published to Maven Central.
-To use it, you must checkout the repository and build locally with `./mvn install`.
-
-Then, add the dependency to `spring-boot-http-clients`:
+Add the dependency to `spring-boot-http-clients`:
 
 ```xml
 <dependency>
