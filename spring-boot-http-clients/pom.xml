@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>com.maciejwalkowiak.spring</groupId>
 		<artifactId>spring-boot-http-clients-parent</artifactId>
-		<version>0.1.0</version>
+		<version>0.1.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>spring-boot-http-clients</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1-SNAPSHOT</version>
 
 	<name>Spring Boot HTTP Clients</name>
 	<description>Spring Boot HTTP Clients</description>
