@@ -9,8 +9,8 @@
 	<packaging>pom</packaging>
 	<properties>
 		<java.version>17</java.version>
-		<spring-boot.version>3.0.5</spring-boot.version>
-		<junit.version>5.9.2</junit.version>
+		<spring-boot.version>3.1.5</spring-boot.version>
+		<junit.version>5.10.0</junit.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
